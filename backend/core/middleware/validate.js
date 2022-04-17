@@ -5,7 +5,7 @@ const parameter = new Parameter();
 const validate = (rule) => {
   return (req, res, next) => {
     const data = { ...req.params, ...req.body, ...req.query };
-    let params = {};
+    const params = {};
     Object.keys(rule).forEach((key) => {
       if (data.hasOwnProperty(key)) params[key] = data[key];
     })
