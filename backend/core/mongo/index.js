@@ -9,7 +9,7 @@ const logger = lib.logger;
 const connectMongo = (mongoConf) => {
   let user = '';
   if (mongoConf.username && mongoConf.password) {
-    user = `${dbConf.username}:${dbConf.password}@`;
+    user = `${mongoConf.username}:${mongoConf.password}@`;
   }
   const uri = `mongodb://${user}${mongoConf.host}:${mongoConf.port || 27017}/${mongoConf.name}`;
   return mongoose.connect(uri);
