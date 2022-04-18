@@ -25,7 +25,7 @@ const create = async (params) => {
 const findOneAndUpdate = async (params) => {
   const filter = _.pick(params, ['_id']);
   const update = _.pick(params, ['name', 'dob', 'address', 'description', 'location', 'createdAt']);
-  const opt = { new: true, upsert: true };
+  const opt = { new: true };
   const data = await userModel.findOneAndUpdate(filter, update, opt);
   return data;
 };
