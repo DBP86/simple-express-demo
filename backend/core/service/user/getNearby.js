@@ -41,20 +41,16 @@ const getNearbyFromMongo = async (params) => {
 };
 
 const getNearby = async (req, res, next) => {
-  let isErr = false;
-  let usersNearby = [];
-
   try {
-    usersNearby = await getNearbyFromRedis(req.params);
-  } catch (err) {
-    isErr = err;
-  }
+    let usersNearby = await getNearbyFromRedis(req.params);
+    if (usersNearby.length) return usersNearby;
   
-  if (isErr || !usersNearby.length) {
     usersNearby = await getNearbyFromMongo(req.params);
-  }
 
-  return res.send(usersNearby);
+    return res.send(usersNearby);
+  } catch (err) {
+    return next(err);
+  }
 };
 
 module.exports = getNearby;

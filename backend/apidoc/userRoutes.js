@@ -19,6 +19,7 @@
  * @apiParam {String} dob User's Dob.
  * @apiParam {String} address User's Address.
  * @apiParam {String} description User's description.
+ * @apiParam {Array} location Users's location [longitude, latitude]
  *
  * @apiSuccess {String} _id User's ID.
  * @apiSuccess {String} name User's Name.
@@ -26,6 +27,7 @@
  * @apiSuccess {String} address User's Address.
  * @apiSuccess {String} description User's description.
  * @apiSuccess {Date} createdAt User's createdAt.
+ * @apiSuccess {Array} location User's location
  */
 
 /**
@@ -38,6 +40,7 @@
  * @apiParam {String} dob User's Dob.
  * @apiParam {String} address User's Address.
  * @apiParam {String} description User's description.
+ * @apiParam {Array} location Users's location [longitude, latitude]
  *
  * @apiSuccess {String} _id User's ID.
  * @apiSuccess {String} name User's Name.
@@ -45,6 +48,7 @@
  * @apiSuccess {String} address User's Address.
  * @apiSuccess {String} description User's description.
  * @apiSuccess {Date} createdAt User's createdAt.
+ * @apiSuccess {Array} location User's location
  */
 
 /**

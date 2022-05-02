@@ -1,25 +1,23 @@
 const config = require('../../config');
 const { userDal } = require(config.mongoDalPath);
 const redis = require(config.redisPath);
+const { logger } = require(config.libPath);
 
 const update = async (req, res, next) => {
   try {
-    if (req.params.longitude && req.params.latitude) {
+    const user = await userDal.findOneAndUpdate(req.params);
+    res.send(user);
+
+    if (req.params.location) {
       const cache = redis.getClient();
       await cache.geoAdd(config.redis.GEOKey, {
-        longitude: req.params.longitude,
-        latitude: req.params.latitude,
+        longitude: req.params.location[0],
+        latitude: req.params.location[1],
         member: req.params._id
       })
-
-      req.params.location = [req.params.longitude, req.params.latitude];
-      delete req.params.longitude;
-      delete req.params.latitude;
     }
 
-    const user = await userDal.findOneAndUpdate(req.params);
-
-    return res.send(user);
+    return true;
   } catch (err) {
     return next(err);
   }

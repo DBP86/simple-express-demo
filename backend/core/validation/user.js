@@ -12,8 +12,7 @@ const create = {
   dob: { required: true, type: 'string', convertType: 'date' },
   address: { required: true, type: 'string' },
   description: { required: true, type: 'string' },
-  longitude: { required: false, type: 'number' },
-  latitude: { required: false, type: 'number' }
+  location: { required: false, type: 'array'}
 };
 
 const update = {
@@ -21,8 +20,7 @@ const update = {
   name: { required: false, type: 'string' },
   dob: { required: false, type: 'date' },
   address: { required: false, type: 'string' },
-  longitude: { required: false, type: 'number' },
-  latitude: { required: false, type: 'number' },
+  location: { required: false, type: 'array'},
   description: { required: false, type: 'string' }
 };
 
