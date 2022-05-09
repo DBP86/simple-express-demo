@@ -1,4 +1,5 @@
-const path = require('path');
+const modulePathConf = require('./modulePathConf');
+const getLog4jsConf = require('./log4jsConf');
 
 const config = {
   port: 8001,
@@ -6,6 +7,10 @@ const config = {
     name: 'TestBackend',
     host: 'localhost',
     port: 27017
+  },
+  auth: {
+    jwtSecret: '(*2J@KJR9fw',
+    salt: '$2a$10$UGOlA/PTq4B9jO00C5S2Du'
   },
   session: {
     name: 'test-backend',
@@ -18,47 +23,9 @@ const config = {
     GEOKey: 'TestBackend',
     password: ''
   },
-  log4js: {
-    appenders: {
-      out: { 
-        type: 'console'
-      }, 
-      access: {
-        type: 'dateFile',
-        filename: path.join(__dirname, '..', 'logs/access/access'),
-        pattern: '-yyyy-MM-dd.log',
-        category: 'access',
-        alwaysIncludePattern: true
-      }, 
-      app: {
-        type: 'file',
-        filename: path.join(__dirname, '..', '/logs/app.log'),
-        maxLogSize: 10485760,
-        numBackups: 3,
-        alwaysIncludePattern: true
-      }, 
-      error: {
-        type: 'dateFile',
-        level: 'ERROR',
-        filename: path.join(__dirname, '..', 'logs/error/errors'),
-        pattern: '-yyyy-MM-dd.log',
-        category: 'error',
-        alwaysIncludePattern: true
-      }
-    },
-    categories: {
-      default: { appenders: ['out'], level: 'info' },
-      access: { appenders: ['out', 'access'], level: 'info'},
-      app: { appenders: ['out', 'app'], level: 'info' },
-      error: { appenders: ['out', 'error'], level: 'error' }
-    }
-  },
-  libPath: path.join(__dirname, '..', 'libs'),
-  middlewarePath: path.join(__dirname, '..', 'middleware'),
-  mongoDalPath: path.join(__dirname, '..', 'mongo', 'dal'),
-  servicePath: path.join(__dirname, '..', 'service'),
-  validationPath: path.join(__dirname, '..', 'validation'),
-  redisPath: path.join(__dirname, '..', 'redis')
+  log4js: getLog4jsConf({isPrintOnConsle: true})
 };
+
+Object.assign(config, modulePathConf);
 
 module.exports = config;

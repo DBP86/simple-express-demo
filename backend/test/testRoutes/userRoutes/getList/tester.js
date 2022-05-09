@@ -1,14 +1,14 @@
 const expect = require('chai').expect;
 const superagent = require('superagent');
 
-const userRoutesGetListTestLib = require('./cases');
+const cases = require('./cases');
 const routesLib = require('../../lib');
 const testAddress = 'http://127.0.0.1:8001';
 
 describe('Test userRoutes getList', () => {
   describe('#getList()', () => {
     it ('testMissingLimit', (done) => {
-      const param = routesLib.json2Param(userRoutesGetListTestLib.testMissingLimit);
+      const param = routesLib.json2Param(cases.testMissingLimit);
       superagent.get(`${testAddress}/v1/user${param}`)
       .send()
       .end((e, res) => {
@@ -18,7 +18,7 @@ describe('Test userRoutes getList', () => {
       })
     })
     it ('testResult', (done) => {
-      const param = routesLib.json2Param(userRoutesGetListTestLib.testResult);
+      const param = routesLib.json2Param(cases.testResult);
       superagent.get(`${testAddress}/v1/user${param}`)
       .send()
       .end((e, res) => {

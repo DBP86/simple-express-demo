@@ -42,12 +42,8 @@ const { authService } = require(config.servicePath);
 const myPassport = authService.passport;
 myPassport(app)
 
-app.use("/", (req, res, next) => {
-  const loginPath = { "/v1/login": true };
-  if (req.isAuthenticated() || loginPath[req.path]) return next();
-  res.statusCode = 401;
-  return next("Login required");
-});
+const { isAuth } = require('./service/auth');
+app.use('/', isAuth);
 
 const route = require('./routes');
 route(app);
