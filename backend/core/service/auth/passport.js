@@ -42,7 +42,8 @@ module.exports = (app) => {
       const user = await userDal.findOne({name: username});
       if (!user) return done(null, false, "User doesn't exist");
       if (!verifyPassword(user, password)) return done(null, false, 'Wrong password');
-      return done(null, user);
+      const userProfile = _.pick(user, ['_id', 'name', 'dob', 'address', 'description']);
+      return done(null, userProfile);
     } catch (err) {
       return done(null, false, err);
     }

@@ -1,5 +1,4 @@
 const passport = require('passport');
-const _ = require('lodash');
 
 const login = (req, res, next) => {
   passport.authenticate('login', {}, (err, user, message) => {
@@ -9,8 +8,7 @@ const login = (req, res, next) => {
     }
     req.login(user, (err) => {
       if (err) return next('System error, please contact the administrator');
-      const userProfile = _.pick(user, ['_id', 'name', 'dob', 'address', 'description']);
-      return res.send(userProfile);
+      return res.send(user);
     })
   })(req, res, next);
 };
